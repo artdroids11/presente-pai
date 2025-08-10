@@ -1,64 +1,49 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<!--
+  Presente digital (mobile-first)
+  - Arquivo único: index.html (HTML + CSS + JS)
+  - Publicar no GitHub Pages: crie repositório, adicione este arquivo como index.html, commit & push, ative Pages nas configurações -> branch main / root.
+--><!doctype html>
+
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Presente para Meu Pai</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to bottom, #1a1a1a, #333);
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
-        h1 {
-            font-size: 1.8em;
-            margin-bottom: 20px;
-        }
-        .presente {
-            margin-top: 50px;
-        }
-        .presente img {
-            width: 150px;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-        .presente img:hover {
-            transform: scale(1.1);
-        }
-        .mensagem {
-            margin-top: 20px;
-            font-size: 1.2em;
-            display: none;
-        }
-        iframe {
-            margin-top: 20px;
-            width: 100%;
-            height: 200px;
-            display: none;
-            border: none;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Presente pro Pai</title>
+  <style>
+    body{margin:0;font-family:Arial, sans-serif;background:#0f1724;color:#fff;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}
+    .wrap{max-width:420px;width:100%;text-align:center}
+    .gift{width:160px;height:160px;margin:0 auto 20px;background:#08203a;border-radius:20px;display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative}
+    .ribbon{position:absolute;top:20%;left:50%;transform:translateX(-50%);width:80%;height:25%;background:gold;border-radius:6px}
+    .message{background:rgba(255,255,255,0.05);padding:14px;border-radius:12px;margin-bottom:12px;font-size:15px;line-height:1.45}
+    iframe{width:100%;height:200px;border-radius:10px;border:0}
+    .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:0.3s}
+    .overlay.open{opacity:1;visibility:visible}
+    .modal{background:#061523;border-radius:16px;padding:16px;width:92%;max-width:420px}
+    .close{background:none;border:none;color:#aaa;font-size:20px;float:right;cursor:pointer}
+  </style>
 </head>
 <body>
-    <h1>Um presente especial para o melhor pai do mundo</h1>
-    <div class="presente">
-        <img src="https://cdn-icons-png.flaticon.com/512/4207/4207260.png" alt="Presente" onclick="abrirPresente()">
+  <div class="wrap">
+    <h1>Presente pra você, pai ❤️</h1>
+    <div class="gift" id="giftBtn">
+      <div class="ribbon"></div>
+      🎁
     </div>
-    <iframe id="musica"></iframe>
-    <p class="mensagem" id="mensagem">
-        Pai, sou grato pela sua existência e por tudo o que fez na minha vida. 
-        Hoje sou um garoto formado e preparado para enfrentar o mundo. 
-        Se não fosse por você, eu não estaria aqui agora. 
-        Eu amo e sempre vou amar você.
-    </p>
-    <script>
-        function abrirPresente() {
-            document.getElementById('musica').src = "https://www.youtube.com/embed/zrRCReN7bqKkfrGT?rel=0&autoplay=1&modestbranding=1&playsinline=1";
-            document.getElementById('musica').style.display = "block";
-            document.getElementById('mensagem').style.display = "block";
-        }
-    </script>
-</body>
+  </div>  <div class="overlay" id="overlay">
+    <div class="modal">
+      <button class="close" id="closeBtn">✕</button>
+      <div class="message">
+        Pai, sou imensamente grato pela sua existência e por tudo o que você fez na minha vida. Hoje sou um garoto formado e preparado para enfrentar o mundo. Se não fosse por você, eu não estaria aqui agora. Por isso eu amo você e sempre vou amar você.
+      </div>
+      <iframe src="https://www.youtube.com/embed/zrRCReN7bqKkfrGT?rel=0&autoplay=1&modestbranding=1&playsinline=1" title="Father to Father - Queen" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  </div>  <script>
+    const giftBtn = document.getElementById('giftBtn');
+    const overlay = document.getElementById('overlay');
+    const closeBtn = document.getElementById('closeBtn');
+
+    giftBtn.addEventListener('click', ()=>overlay.classList.add('open'));
+    closeBtn.addEventListener('click', ()=>overlay.classList.remove('open'));
+    overlay.addEventListener('click', (e)=>{if(e.target===overlay)overlay.classList.remove('open')});
+  </script></body>
 </html>
